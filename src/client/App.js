@@ -13,11 +13,15 @@ On sumbit a search should be made on the server
 */
 
 export default class App extends Component {
-  state = { 
-    username: null,
-    text: '',
-    res: null,
+  constructor(props){
+    super(props)
+    this.state = { 
+      username: null,
+      text: '',
+      res: null,
+      searchTerm: 'apples'
      };
+    }
 
   componentDidMount() {
     fetch('/api/getUsername?searchTerm={apples}')
@@ -35,10 +39,8 @@ export default class App extends Component {
     console.log(res);
     return (
       <div>
-        <SearchInput/>
-        <SearchInput/>
-        <SearchInput/>
-
+        <SearchInput searchTerm={this.state.searchTerm}/>
+        
         {username ? <h1>{`${text} ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
         <img src={ReactImage} alt="react" />
       </div>
