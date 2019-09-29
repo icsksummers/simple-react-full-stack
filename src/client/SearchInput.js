@@ -6,7 +6,11 @@ export default function SearchInput(props) {
 
     <form>
         {props.searchTerm}
-        <input/>
+        <input
+            onChange={props.onChange}
+            value={props.searchTerm}
+            type='text'
+        />
         <button>Search</button>
     </form>
     )

@@ -19,8 +19,10 @@ export default class App extends Component {
       username: null,
       text: '',
       res: null,
-      searchTerm: 'apples'
+      searchTerm: ''
      };
+
+     this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
     }
 
   componentDidMount() {
@@ -33,13 +35,18 @@ export default class App extends Component {
      }));
   }
 
+  onChangeSearchTerm(e){
+    this.setState({searchTerm: e.target.value});
+    console.log(this.state.searchTerm);
+  }
+
   render() {
     const { username, text, res } = this.state;
 
     console.log(res);
     return (
       <div>
-        <SearchInput searchTerm={this.state.searchTerm}/>
+        <SearchInput searchTerm={this.state.searchTerm} onChange={this.onChangeSearchTerm}/>
         
         {username ? <h1>{`${text} ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
         <img src={ReactImage} alt="react" />
