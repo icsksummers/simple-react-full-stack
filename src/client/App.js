@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import './app.css';
 import ReactImage from './react.png';
+import SearchInput from './SearchInput';
+
+/*
+1. Create an inputbox
+Input box should be dynamic and take in a search term
+On sumbit a search should be made on the server
+
+2. Display the responses from the search
+
+*/
 
 export default class App extends Component {
   state = { 
@@ -25,6 +35,10 @@ export default class App extends Component {
     console.log(res);
     return (
       <div>
+        <SearchInput/>
+        <SearchInput/>
+        <SearchInput/>
+
         {username ? <h1>{`${text} ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
         <img src={ReactImage} alt="react" />
       </div>

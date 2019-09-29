@@ -37,7 +37,7 @@ app.get('/api/getUsername', function (req,res, next){
             text: 'Bye'
         }
 
-        fetch(`${API_URL}?api_key=${API_KEY}&query=spiderman`)
+        fetch(`${API_URL}?api_key=${API_KEY}&query=${searchTerm}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
