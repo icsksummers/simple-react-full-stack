@@ -10,7 +10,7 @@ export default class App extends Component {
      };
 
   componentDidMount() {
-    fetch('/api/getUsername')
+    fetch('/api/getUsername?searchTerm={apples}')
       .then(res => res.json())
       .then(data => this.setState({ 
         username: data.username,

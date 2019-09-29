@@ -10,8 +10,28 @@ const API_URL = process.env.API_URL;
 
 console.log(API_URL);
 
+
+
 app.use(express.static('dist'));
 app.get('/api/getUsername', function (req,res, next){
+
+    // console.log('this is request', req);
+
+    // rwq is the rwquest from localhost:3000
+
+    //set searchTerm = the query obj of the request
+    const searchTerm = req.query.searchTerm;
+
+    //make sure that we can grab searchTerm form query string
+    
+    /* the string in the fetch from App.js is the query string 
+        fetch('/api/getUsername?searchTerm=${this.state.searchTerm}')
+
+        the endpoint ' /api/getUsername' matches the one in this function:
+        'app.get('/api/getUsername', function (req,res, next)'
+        */
+
+        console.log('===this is searchTerm', searchTerm);
         let myResponse = {
             username: os.userInfo().username,
             text: 'Bye'
