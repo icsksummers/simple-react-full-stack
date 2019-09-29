@@ -22,6 +22,7 @@ export default class App extends Component {
       searchTerm: ''
      };
 
+     this.onSearch = this.onSearch.bind(this);
      this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
     }
 
@@ -34,19 +35,24 @@ export default class App extends Component {
       res: data.data
      }));
   }
-
+  
   onChangeSearchTerm(e){
     this.setState({searchTerm: e.target.value});
     console.log(this.state.searchTerm);
   }
 
+  onSearch(e){
+  // prevent Default from form submit refresh
+    e.preventDefault();
+    console.log('==on search called== with searchTerm',this.state.searchTerm);
+  }
   render() {
     const { username, text, res } = this.state;
 
     console.log(res);
     return (
       <div>
-        <SearchInput searchTerm={this.state.searchTerm} onChange={this.onChangeSearchTerm}/>
+        <SearchInput searchTerm={this.state.searchTerm} onChange={this.onChangeSearchTerm} onSearch={this.onSearch}/>
         
         {username ? <h1>{`${text} ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
         <img src={ReactImage} alt="react" />

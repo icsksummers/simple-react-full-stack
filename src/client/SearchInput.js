@@ -4,14 +4,14 @@ export default function SearchInput(props) {
     return (
         /*jsx - mix of javascript and HTML */
 
-    <form>
+    <form onSubmit={props.onSearch}>
         {props.searchTerm}
         <input
             onChange={props.onChange}
             value={props.searchTerm}
             type='text'
         />
-        <button>Search</button>
+        <button type='submit'>Search</button>
     </form>
     )
 }
