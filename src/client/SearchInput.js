@@ -5,7 +5,6 @@ export default function SearchInput(props) {
         /*jsx - mix of javascript and HTML */
 
     <form onSubmit={props.onSearch}>
-        {props.searchTerm}
         <input
             onChange={props.onChange}
             value={props.searchTerm}

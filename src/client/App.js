@@ -16,9 +16,9 @@ export default class App extends Component {
   constructor(props){
     super(props)
     this.state = { 
-      username: null,
+      username: '',
       text: '',
-      res: null,
+      res: {},
       searchTerm: ''
      };
 
@@ -27,7 +27,7 @@ export default class App extends Component {
     }
 
   componentDidMount() {
-    fetch('/api/getUsername?searchTerm={apples}')
+    fetch(`/api/getUsername?searchTerm=${this.state.searchTerm}`)
       .then(res => res.json())
       .then(data => this.setState({ 
         username: data.username,
@@ -45,18 +45,47 @@ export default class App extends Component {
   // prevent Default from form submit refresh
     e.preventDefault();
     console.log('==on search called== with searchTerm',this.state.searchTerm);
+    fetch(`/api/getUsername?searchTerm=${this.state.searchTerm}`)
+      .then(res => res.json())
+      .then(data => this.setState({ 
+        res: data.data
+     }));
   }
   render() {
     const { username, text, res } = this.state;
 
-    console.log(res);
+    let renderedMovies;
+
+
+    if (this.state.res.results) {
+      renderedMovies = this.state.res.results.map((movie,i) =>{
+        return (
+          <li key={i}>{movie.title}</li>
+        )
+      })
+    }
+
+    console.log('===rendered Movies==' ,renderedMovies);
     return (
       <div>
+        <h1>
+          Search Movies
+        </h1>
         <SearchInput searchTerm={this.state.searchTerm} onChange={this.onChangeSearchTerm} onSearch={this.onSearch}/>
+
+        {/*
+        This is a terinary operator to check that the client and server connected with data on the user
+      
         
         {username ? <h1>{`${text} ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
-      </div>
+
+      
+          {/* This is a terinary operator to render movies if it exists */}
+
+        <ul>
+          {(renderedMovies) ? renderedMovies:''}
+        </ul>
+          </div>
     );
   }
 }
